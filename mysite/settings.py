@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'cv.apps.CvConfig',
+    'landing.apps.LandingConfig',
 ]
 
 MIDDLEWARE = [
