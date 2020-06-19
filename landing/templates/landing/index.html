@@ -1,9 +1,49 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <!-- Bootstrap & Font Awesome CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/7ddc721bd7.js" crossorigin="anonymous"></script>
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+        <!-- Meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
         <title>Home</title>
     </head>
-    <body>
-        Home placeholder
+    <body class="text-center">
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom py-4">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> <!-- render the button -->
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="">home</a>
+                    <a class="nav-item nav-link" href="blog/">blog</a>
+                    <a class="nav-item nav-link" href="cv/">resume</a>  
+                </div>
+            </div>
+        </nav>
+
+        <div class="py-5">
+            <h3>Ravind Tumber</h3>
+            <h3>Bridging Coursework</h3>
+        </div>
+
+        <div class="py-5">
+            <h3>about me</h3>
+            <p>I study Computer Science at the University of Birmingham!</p>
+            <p>I enjoy taking on challenges to create innovative solutions. When I'm not gaming, you can find me reading books, attempting to cook or just chilling :)</p>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     </body>
 </html>
