@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html>
+{% extends 'landing/base.html' %}
+
+{% block content %} 
     <head>
         <title>Blog</title>
     </head>
-    <body>
-        <div>
-            <h1><a href="/">Blog</a></h1>
-        </div>
 
+    <body>
         {% for post in posts %} 
             <div>
                 <h1>{{ post.title }}</h1>
@@ -17,4 +15,4 @@
             </div>
         {% endfor %}
     </body>
-</html>
+{% endblock %}

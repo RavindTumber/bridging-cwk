@@ -1,8 +1,14 @@
 .navbar-custom {
-    background-color: #262730;
+    background-color: #4266BB;
 }
 
 .nav-item {
     font-size: 140%;
     margin-right: 30px;
+    color: white;
+}
+
+.img {
+    max-width: 100%;
+    max-height: 100%;
 }
