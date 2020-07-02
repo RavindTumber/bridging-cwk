@@ -13,3 +13,18 @@
         #4267BB, #11368B
     );
 }
+
+i.far,
+i.fab {
+    color: #6383CE;
+    font-size: 2.5rem;
+  }
+
+i.far:hover,
+i.fab:hover {
+    color: #11368B;
+}
+
+a:hover {
+    text-decoration: none;
+}

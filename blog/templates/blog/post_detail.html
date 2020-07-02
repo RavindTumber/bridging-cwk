@@ -1,7 +1,24 @@
 {% extends 'landing/base.html' %}
 
-{% block content %} 
+{% block content %}
+    <head>
+        <title>{{ post.title }}</title>
+    </head>
+
     <body>
-        <p>Placeholder</p>
+        <div class="jumbotron jumbotron-fluid text-white">
+            <div class="container">
+                <h1>Ravind's Blog</h1>
+                <p>Everything blog related.</p>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <h3>{{ post.title }}</h3>
+            <hr>
+            <p>{{ post.published_date.date }}</p>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
     </body>
+
 {% endblock %}
