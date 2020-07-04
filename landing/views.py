@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
-
 def home_view(request):
-    return render(request, 'landing/index.html', {})
+    # add a context so that the respective page will have the active class applied within the base.html
+    return render(request, 'landing/index.html', {'home_page': 'active'})
