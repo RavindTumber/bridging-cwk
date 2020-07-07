@@ -37,9 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # local apps
     'blog.apps.BlogConfig',
     'cv.apps.CvConfig',
     'landing.apps.LandingConfig',
+
+    # third party
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
