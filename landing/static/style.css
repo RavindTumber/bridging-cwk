@@ -14,6 +14,10 @@
     );
 }
 
+.post-form textarea, .post-form input {
+    width: 100%;
+}
+
 i.far,
 i.fab {
     color: #6383CE;
