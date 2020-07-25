@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.contrib.auth import views
+
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,6 +27,7 @@ urlpatterns = [
     path('cv/', include('cv.urls')),
     path('', include('landing.urls')),
     path('summernote/', include('django_summernote.urls')),
+    path('accounts/login/', views.LoginView.as_view(), name='login'),
 ]
 
 if settings.DEBUG:
