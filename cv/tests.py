@@ -34,6 +34,16 @@ class CVEducationTest(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_education_form_no_data(self):
-        form = EducationForm(data={})
+        form = EducationForm(data = {})
         self.assertFalse(form.is_valid())
-    
+
+    def test_education_form_POST_adds_new_education(self):
+        response = self.client.post('/cv/education/new/', {
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        self.assertEquals(response.status_code, 302)
+        self.assertEquals(len(Education.objects.all()), 1)
