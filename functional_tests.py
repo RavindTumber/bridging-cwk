@@ -47,6 +47,12 @@ class FunctionalTest(unittest.TestCase):
 
         # User should be redirected to the CV page where their education details will be displayed
         education = self.driver.find_element_by_id('education_1')
+        self.assertIn('Test name', education)
+
+        # User realises that they have entered incorrect data and decide to edit it
+        # self.driver.find_element_by_id('edit-education').click()
+        # self.driver.find_element_by_id('id_name').send_keys('Test updated name')
+        # self.driver.find_element_by_id('save').click()
 
 if __name__ == '__main__':
     unittest.main()
