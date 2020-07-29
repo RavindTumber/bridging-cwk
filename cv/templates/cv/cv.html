@@ -6,8 +6,38 @@
     </head>
 
     <body>
-        <div class="container mt-5">
-            <p>CV placeholder</p>
+        <div class="container mt-5 shadow-sm p-3 mb-5 bg-white rounded">
+            <h1 class="text-center">Ravind Tumber
+                <br>
+                <small class="text-muted">Coventry, West Midlands</small>
+            </h1>
+            <br>
+            <p class="text-center">A diligent and hard-working second year computer science student who loves tackling problems.</p>
+            <hr>
+                        
+            <div id="Education">
+                <h3>Education</h3>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'cv:education_new' %}" class="btn btn-primary" id="add-education">Add Education</a>
+                    <br>
+                {% endif %}
+
+                {% for education in educations %}
+                    <div id="education_{{ forloop.counter }}">
+                        {{ education.name }}
+                        {{ education.location }}
+                        {{ education.start_date }}
+                        {{ education.end_date }}
+                        {{ education.description }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div id="Experience">
+
+            </div>
+            <div id="Volunteering">
+
+            </div>
         </div>
     </body>
 {% endblock %}
