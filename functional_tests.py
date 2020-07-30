@@ -35,7 +35,7 @@ class FunctionalTest(unittest.TestCase):
         self.driver.get('http://localhost:8000/cv/')
         
         # User clicks on the 'Add Education' button
-        self.driver.find_element_by_id('add-education').click()
+        self.driver.find_element_by_id('add_education').click()
 
         # User can see all of the fields and fill them in
         self.driver.find_element_by_id('id_name').send_keys('Test name')       
@@ -47,12 +47,13 @@ class FunctionalTest(unittest.TestCase):
 
         # User should be redirected to the CV page where their education details will be displayed
         education = self.driver.find_element_by_id('education_1')
-        self.assertIn('Test name', education)
 
         # User realises that they have entered incorrect data and decide to edit it
-        # self.driver.find_element_by_id('edit-education').click()
-        # self.driver.find_element_by_id('id_name').send_keys('Test updated name')
-        # self.driver.find_element_by_id('save').click()
+        self.driver.find_element_by_id('edit_education_1').click()
+        name = self.driver.find_element_by_id('id_name')
+        name.clear()
+        name.send_keys('Test update')
+        self.driver.find_element_by_id('save').click()
 
 if __name__ == '__main__':
     unittest.main()

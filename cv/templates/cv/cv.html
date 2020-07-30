@@ -18,14 +18,18 @@
             <div id="Education">
                 <h3 class="text-center">Education</h3>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'cv:education_new' %}" class="btn btn-primary" id="add-education">Add Education</a>
-                    <br>
+                    <a href="{% url 'cv:education_new' %}" class="btn btn-primary" id="add_education">Add Education</a>
+                    <br> <br>
                 {% endif %}
 
                 {% for education in educations %}
                     <div class="card bg-light mb-3" id="education_{{ forloop.counter }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ education.name }}</h5>
+                            <h5 class="card-title">{{ education.name }}
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'cv:education_edit' pk=education.pk %}" style="float:right;" class="btn btn-primary" id="edit_education_{{ forloop.counter }}">Edit</a>
+                                {% endif %}
+                            </h5>
                             <p class="card-text">{{ education.location }} ({{ education.start_date }} - {{ education.end_date }})
                                 <br> {{ education.description }}
                             </p> 

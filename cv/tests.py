@@ -19,10 +19,6 @@ class CVEducationTest(TestCase):
     def tearDown(self):
         self.user.delete()
 
-    def test_uses_new_education_template(self):
-        response = self.client.get('/cv/education/new/')
-        self.assertTemplateUsed(response, 'cv/education_edit.html')
-
     def test_education_form_valid_data(self):
         form = EducationForm(data={
             'name': 'Test',
@@ -31,11 +27,15 @@ class CVEducationTest(TestCase):
             'end_date': '2020',
             'description': 'Test'
         })
-        self.assertTrue(form.is_valid())
+        self.assertTrue(form.is_valid(), 'Should be valid if data is given')
 
     def test_education_form_no_data(self):
-        form = EducationForm(data = {})
-        self.assertFalse(form.is_valid())
+        form = EducationForm(data={})
+        self.assertFalse(form.is_valid(), 'Should be invalid if no data is given')
+
+    def test_uses_education_new_template(self):
+        response = self.client.get('/cv/education/new/')
+        self.assertTemplateUsed(response, 'cv/education_edit.html', 'Authenticated user can access') 
 
     def test_education_form_POST_adds_new_education(self):
         response = self.client.post('/cv/education/new/', {
@@ -45,5 +45,40 @@ class CVEducationTest(TestCase):
             'end_date': '2020',
             'description': 'Test'
         })
-        self.assertEquals(response.status_code, 302)
-        self.assertEquals(len(Education.objects.all()), 1)
+        self.assertEquals(response.status_code, 302, 'Should redirect back to /cv/')
+        self.assertEquals(len(Education.objects.all()), 1, 'Should only be one object created')
+        self.assertEqual(Education.objects.first().name, 'Test', 'Should have its name be equal to Test')
+
+    def test_uses_education_edit_template(self):
+        self.client.post('/cv/education/new/', {
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        education = Education.objects.first()
+        response = self.client.get('/cv/education/' + str(education.pk) + '/edit/')
+        self.assertTemplateUsed(response, 'cv/education_edit.html', 'Authenticated user can access')
+    
+    def test_education_edit(self):
+        self.client.post('/cv/education/new/', {
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        education = Education.objects.first()
+        response = self.client.post('/cv/education/' + str(education.pk) + '/edit/', {
+            'name': 'Test edit',
+            'location': 'Test edit',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        education = Education.objects.first()
+        self.assertEquals(len(Education.objects.all()), 1, 'Should only be one object created')
+        self.assertEqual(response['location'], '/cv/', 'Should point the browser to a new location: /cv/')
+        self.assertEquals(education.name, 'Test edit', 'Should update the education name field')
+        self.assertEquals(education.location, 'Test edit', 'Should update the education location field')
