@@ -33,3 +33,9 @@ def education_edit(request, pk):
         form = EducationForm(instance=education)
     
     return render(request, 'cv/education_edit.html', {'form': form})
+
+@login_required
+def education_remove(request, pk):
+    education = get_object_or_404(Education, pk=pk)
+    education.delete()
+    return redirect('cv:display_cv')

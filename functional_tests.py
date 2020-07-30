@@ -54,6 +54,12 @@ class FunctionalTest(unittest.TestCase):
         name.clear()
         name.send_keys('Test update')
         self.driver.find_element_by_id('save').click()
+        updated_name = self.driver.find_element_by_xpath('//*[@id="education_1"]/div/h5')
+        self.assertIn('Test update', updated_name.text, "Should display updated text, include '\nEdit' since it is in the same tag")
+
+        # User decides to delete an education entry
+        self.driver.find_element_by_id('delete_education_1').click()
+        self.assertEqual(len(self.driver.find_elements_by_class_name('card')), 0)
 
 if __name__ == '__main__':
     unittest.main()

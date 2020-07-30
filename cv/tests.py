@@ -78,7 +78,21 @@ class CVEducationTest(TestCase):
             'description': 'Test'
         })
         education = Education.objects.first()
-        self.assertEquals(len(Education.objects.all()), 1, 'Should only be one object created')
         self.assertEqual(response['location'], '/cv/', 'Should point the browser to a new location: /cv/')
+        self.assertEquals(len(Education.objects.all()), 1, 'Should only be one object created')
         self.assertEquals(education.name, 'Test edit', 'Should update the education name field')
         self.assertEquals(education.location, 'Test edit', 'Should update the education location field')
+
+    def test_education_delete(self):
+        self.client.post('/cv/education/new/', {
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        education = Education.objects.first()
+        response = self.client.get('/cv/education/' + str(education.pk) + '/remove/')
+        self.assertEqual(response['location'], '/cv/', 'Should point the browser to a new location: /cv/')
+        self.assertEquals(len(Education.objects.all()), 0, 'Should be zero education objects')
+
