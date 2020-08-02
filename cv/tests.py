@@ -26,6 +26,10 @@ class CvVolunteeringTest(TestCase):
         form = VolunteeringForm(data={})
         self.assertFalse(form.is_valid(), 'Should be invalid if no data is given')
 
+    def test_uses_volunteering_new_template(self):
+        response = self.client.get('/cv/volunteering/new/')
+        self.assertTemplateUsed(response, 'cv/volunteering_edit.html')
+
 class CvEducationTest(TestCase):
     
     def setUp(self):
