@@ -10,7 +10,23 @@ class CVPageTest(TestCase):
         response = self.client.get('/cv/')
         self.assertTemplateUsed(response, 'cv/cv.html')
 
-class CVEducationTest(TestCase):
+class CvVolunteeringTest(TestCase):
+
+    def test_volunteering_form_valid_data(self):
+        form = VolunteeringForm(data={
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        self.assertTrue(form.is_valid(), 'Should be valid if appropriate data is given')
+
+    def test_volunteering_form_no_data(self):
+        form = VolunteeringForm(data={})
+        self.assertFalse(form.is_valid(), 'Should be invalid if no data is given')
+
+class CvEducationTest(TestCase):
     
     def setUp(self):
         self.user = User.objects.create_user(username='tempUser', password='temp')
@@ -27,7 +43,7 @@ class CVEducationTest(TestCase):
             'end_date': '2020',
             'description': 'Test'
         })
-        self.assertTrue(form.is_valid(), 'Should be valid if data is given')
+        self.assertTrue(form.is_valid(), 'Should be valid if appropriate data is given')
 
     def test_education_form_no_data(self):
         form = EducationForm(data={})

@@ -6,3 +6,6 @@ class Education(models.Model):
     start_date = models.CharField(max_length=20)
     end_date = models.CharField(max_length=20)
     description = models.TextField() 
+
+    def __str__(self):
+        return self.name
