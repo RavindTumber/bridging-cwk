@@ -2,7 +2,9 @@
 
 {% block content %}
     <div class="container mt-5">
-        {{ form.as_p }}
+        <form method="POST" class="post-form">
+            {{ form.as_p }}
+        </form>
     </div>
 
 {% endblock %}
