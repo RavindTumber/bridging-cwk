@@ -134,3 +134,50 @@ class CvVolunteeringTest(TestCase):
         self.assertEquals(response.status_code, 302, 'Should redirect back to /cv/')
         self.assertEquals(len(Volunteering.objects.all()), 1, 'Should only be one object created')
         self.assertEqual(Volunteering.objects.first().name, 'Test', 'Should have its name be equal to Test')
+
+    def test_uses_voluntering_edit_template(self):
+        self.client.post('/cv/volunteering/new/', {
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        volunteering = Volunteering.objects.first()
+        response = self.client.get('/cv/volunteering/' + str(volunteering.pk) + '/edit/')
+        self.assertTemplateUsed(response, 'cv/volunteering_edit.html', 'Authenticated user can access')
+    
+    def test_volunteering_edit(self):
+        self.client.post('/cv/volunteering/new/', {
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        volunteering = Volunteering.objects.first()
+        response = self.client.post('/cv/volunteering/' + str(volunteering.pk) + '/edit/', {
+            'name': 'Test edit',
+            'location': 'Test edit',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        volunteering = Volunteering.objects.first()
+        self.assertEqual(response['location'], '/cv/', 'Should point the browser to a new location: /cv/')
+        self.assertEquals(len(Volunteering.objects.all()), 1, 'Should only be one object created')
+        self.assertEquals(volunteering.name, 'Test edit', 'Should update the volunteering name field')
+        self.assertEquals(volunteering.location, 'Test edit', 'Should update the volunteering location field')
+
+    def test_volunteering_delete(self):
+        self.client.post('/cv/volunteering/new/', {
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        volunteering = Volunteering.objects.first()
+        response = self.client.get('/cv/volunteering/' + str(volunteering.pk) + '/remove/')
+        self.assertEqual(response['location'], '/cv/', 'Should point the browser to a new location: /cv/')
+        self.assertEquals(len(Volunteering.objects.all()), 0, 'Should be zero volunteering objects')
