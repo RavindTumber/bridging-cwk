@@ -40,6 +40,7 @@ def education_remove(request, pk):
     education.delete()
     return redirect('cv:display_cv')
 
+@login_required
 def volunteering_new(request):
     form = VolunteeringForm()
     return render(request, 'cv/volunteering_edit.html', {'form': form})

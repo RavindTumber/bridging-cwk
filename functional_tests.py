@@ -38,11 +38,11 @@ class FunctionalTest(unittest.TestCase):
         self.driver.find_element_by_id('add_education').click()
 
         # User can see all of the fields and fill them in
-        self.driver.find_element_by_id('id_name').send_keys('Test name')       
-        self.driver.find_element_by_id('id_location').send_keys('Test location')
-        self.driver.find_element_by_id('id_start_date').send_keys('2011')        
+        self.driver.find_element_by_id('id_name').send_keys('Test education')       
+        self.driver.find_element_by_id('id_location').send_keys('Test education')
+        self.driver.find_element_by_id('id_start_date').send_keys('2019')        
         self.driver.find_element_by_id('id_end_date').send_keys('2020')
-        self.driver.find_element_by_id('id_description').send_keys('Test description')
+        self.driver.find_element_by_id('id_description').send_keys('Test education')
         self.driver.find_element_by_id('save').click()
 
         # User should be redirected to the CV page where their education details will be displayed
@@ -69,6 +69,17 @@ class FunctionalTest(unittest.TestCase):
 
         # User clicks on the 'Add Volunteering' button
         self.driver.find_element_by_id('add_volunteering').click()
+
+        # User can see all of the fields and fill them in
+        self.driver.find_element_by_id('id_name').send_keys('Test volunteering')
+        self.driver.find_element_by_id('id_location').send_keys('Test volunteering')
+        self.driver.find_element_by_id('id_start_date').send_keys('2019')
+        self.driver.find_element_by_id('id_end_date').send_keys('2020')
+        self.driver.find_element_by_id('id_description').send_keys('Test volunteering')
+        self.driver.find_element_by_id('save').click()
+
+        # User should be redirected to the CV page where their volunteering details will be displayed
+        volunteering = self.driver.find_element_by_id('volunteering_1')
 
 if __name__ == '__main__':
     unittest.main()

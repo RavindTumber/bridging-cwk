@@ -10,26 +10,6 @@ class CVPageTest(TestCase):
         response = self.client.get('/cv/')
         self.assertTemplateUsed(response, 'cv/cv.html')
 
-class CvVolunteeringTest(TestCase):
-
-    def test_volunteering_form_valid_data(self):
-        form = VolunteeringForm(data={
-            'name': 'Test',
-            'location': 'Test',
-            'start_date': '2019',
-            'end_date': '2020',
-            'description': 'Test'
-        })
-        self.assertTrue(form.is_valid(), 'Should be valid if appropriate data is given')
-
-    def test_volunteering_form_no_data(self):
-        form = VolunteeringForm(data={})
-        self.assertFalse(form.is_valid(), 'Should be invalid if no data is given')
-
-    def test_uses_volunteering_new_template(self):
-        response = self.client.get('/cv/volunteering/new/')
-        self.assertTemplateUsed(response, 'cv/volunteering_edit.html')
-
 class CvEducationTest(TestCase):
     
     def setUp(self):
@@ -116,3 +96,29 @@ class CvEducationTest(TestCase):
         self.assertEqual(response['location'], '/cv/', 'Should point the browser to a new location: /cv/')
         self.assertEquals(len(Education.objects.all()), 0, 'Should be zero education objects')
 
+class CvVolunteeringTest(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username='tempUser', password='temp')
+        self.client.login(username='tempUser', password='temp')
+    
+    def tearDown(self):
+        self.user.delete()
+
+    def test_volunteering_form_valid_data(self):
+        form = VolunteeringForm(data={
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        self.assertTrue(form.is_valid(), 'Should be valid if appropriate data is given')
+
+    def test_volunteering_form_no_data(self):
+        form = VolunteeringForm(data={})
+        self.assertFalse(form.is_valid(), 'Should be invalid if no data is given')
+
+    def test_uses_volunteering_new_template(self):
+        response = self.client.get('/cv/volunteering/new/')
+        self.assertTemplateUsed(response, 'cv/volunteering_edit.html', 'Authenticated user can access')

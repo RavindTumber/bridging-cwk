@@ -39,12 +39,15 @@
                     <br>
                 {% endfor %}
             </div>
-            <div id="Experience">
 
-            </div>
             <div id="Volunteering">
-
+                {% if user.is_authenticated %}
+                    <a href="{% url 'cv:volunteering_new' %}" class="btn btn-primary" id="add_volunteering">Add Volunteering</a>
+                {% endif %}
             </div>
+
+            <div id="Experience"></div>
+
         </div>
     </body>
 {% endblock %}
