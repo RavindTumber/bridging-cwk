@@ -22,17 +22,18 @@
                     <br> <br>
                 {% endif %}
 
-                {% for education in educations %}
+                {% for entry in education %}
                     <div class="card bg-light mb-3" id="education_{{ forloop.counter }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ education.name }}
+                            <h5 class="card-title">{{ entry.name }}
                                 {% if user.is_authenticated %}
-                                    <a href="{% url 'cv:education_edit' pk=education.pk %}" style="float:right;" class="btn btn-primary" id="edit_education_{{ forloop.counter }}">Edit</a>
-                                    <a href="{% url 'cv:education_remove' pk=education.pk %}" style="float:right; margin-right: 0.5rem;" class="btn btn-primary" id="delete_education_{{ forloop.counter }}">Delete</a>
+                                    <a href="{% url 'cv:education_edit' pk=entry.pk %}" style="float:right;" class="btn btn-primary" id="edit_education_{{ forloop.counter }}">Edit</a>
+                                    <a href="{% url 'cv:education_remove' pk=entry.pk %}" style="float:right; margin-right: 0.5rem;" class="btn btn-primary" id="delete_education_{{ forloop.counter }}">Delete</a>
                                 {% endif %}
                             </h5>
-                            <p class="card-text">{{ education.location }} ({{ education.start_date }} - {{ education.end_date }})
-                                <br> {{ education.description }}
+                            <p class="card-text">{{ entry.location }} ({{ entry.start_date }} - {{ entry.end_date }})
+                                <br> 
+                                {{ entry.description }}
                             </p> 
                         </div>
                     </div>
@@ -41,9 +42,25 @@
             </div>
 
             <div id="Volunteering">
+                <h3 class="text-center">Volunteering</h3>
                 {% if user.is_authenticated %}
                     <a href="{% url 'cv:volunteering_new' %}" class="btn btn-primary" id="add_volunteering">Add Volunteering</a>
+                    <br> <br>
                 {% endif %}
+
+                {% for entry in volunteering %}
+                    <div class="card bg-light mb-3" id="volunteering_{{ forloop.counter }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ entry.name }}
+                                
+                            </h5>
+                            <p class="card-text">{{ entry.location }} ({{ entry.start_date }} - {{ entry.end_date }})
+                                <br> 
+                                {{ entry.description }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
 
             <div id="Experience"></div>

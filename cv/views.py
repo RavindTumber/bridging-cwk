@@ -6,8 +6,9 @@ from .models import Education, Volunteering
 from .forms import EducationForm, VolunteeringForm
 
 def display_cv(request):
-    educations = Education.objects.all()
-    return render(request, 'cv/cv.html', {'educations': educations, 'cv_page': 'active'})
+    education = Education.objects.all()
+    volunteering = Volunteering.objects.all()
+    return render(request, 'cv/cv.html', {'education': education, 'volunteering': volunteering, 'cv_page': 'active'})
 
 @login_required
 def education_new(request):
@@ -42,5 +43,12 @@ def education_remove(request, pk):
 
 @login_required
 def volunteering_new(request):
-    form = VolunteeringForm()
+    if request.method == "POST":
+        form = VolunteeringForm(request.POST)
+        if form.is_valid:
+            volunteering = form.save()
+            return redirect('cv:display_cv')
+    else:
+        form = VolunteeringForm()
+
     return render(request, 'cv/volunteering_edit.html', {'form': form})
