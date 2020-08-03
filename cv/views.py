@@ -52,3 +52,22 @@ def volunteering_new(request):
         form = VolunteeringForm()
 
     return render(request, 'cv/volunteering_edit.html', {'form': form})
+
+@login_required
+def volunteering_edit(request, pk):
+    volunteering = get_object_or_404(Volunteering, pk=pk)
+    if request.method == "POST":
+        form = VolunteeringForm(request.POST, instance=volunteering)
+        if form.is_valid:
+            volunteering = form.save()
+            return redirect('cv:display_cv')
+    else:
+        form = VolunteeringForm(instance=volunteering)
+    
+    return render(request, 'cv/volunteering_edit.html', {'form': form})
+
+@login_required
+def volunteering_remove(request, pk):
+    volunteering = get_object_or_404(Volunteering, pk=pk)
+    volunteering.delete()
+    return redirect('cv:display_cv')

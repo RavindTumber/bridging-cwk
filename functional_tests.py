@@ -87,7 +87,7 @@ class FunctionalTest(unittest.TestCase):
         name.clear()
         name.send_keys('Test update')
         self.driver.find_element_by_id('save').click()
-        updated_name = self.driver.find_element_by_xpath('//*[@id="education_1"]/div/h5')
+        updated_name = self.driver.find_element_by_xpath('//*[@id="volunteering_1"]/div/h5')
         self.assertIn('Test update', updated_name.text, "Should display updated text")
 
         # User decides to delete a volunteering entry
