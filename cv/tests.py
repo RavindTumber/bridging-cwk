@@ -132,5 +132,5 @@ class CvVolunteeringTest(TestCase):
             'description': 'Test'
         })
         self.assertEquals(response.status_code, 302, 'Should redirect back to /cv/')
-        self.assertEquals(len(Education.objects.all()), 1, 'Should only be one object created')
-        self.assertEqual(Education.objects.first().name, 'Test', 'Should have its name be equal to Test')
+        self.assertEquals(len(Volunteering.objects.all()), 1, 'Should only be one object created')
+        self.assertEqual(Volunteering.objects.first().name, 'Test', 'Should have its name be equal to Test')
