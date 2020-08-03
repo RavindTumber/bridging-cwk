@@ -122,3 +122,15 @@ class CvVolunteeringTest(TestCase):
     def test_uses_volunteering_new_template(self):
         response = self.client.get('/cv/volunteering/new/')
         self.assertTemplateUsed(response, 'cv/volunteering_edit.html', 'Authenticated user can access')
+
+    def test_volunteering_form_POST_adds_new_volunteering(self):
+        response = self.client.post('/cv/volunteering/new/', {
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        self.assertEquals(response.status_code, 302, 'Should redirect back to /cv/')
+        self.assertEquals(len(Education.objects.all()), 1, 'Should only be one object created')
+        self.assertEqual(Education.objects.first().name, 'Test', 'Should have its name be equal to Test')
