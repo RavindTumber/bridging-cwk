@@ -34,6 +34,10 @@ class CvEmploymentTest(TestCase):
         form = EmploymentForm(data={})
         self.assertFalse(form.is_valid(), 'Should be invalid if no data is given')
 
+    def test_uses_employment_new_template(self):
+        response = self.client.get('/cv/employment/new/')
+        self.assertTemplateUsed(response, 'cv/employment_edit.html', 'Authenticated user can access')
+
 class CvEducationTest(TestCase):
     
     def setUp(self):

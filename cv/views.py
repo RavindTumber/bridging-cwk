@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .models import Education, Volunteering
-from .forms import EducationForm, VolunteeringForm
+from .models import Employment, Education, Volunteering
+from .forms import EmploymentForm, EducationForm, VolunteeringForm
 
 def display_cv(request):
     education = Education.objects.all()
@@ -71,3 +71,7 @@ def volunteering_remove(request, pk):
     volunteering = get_object_or_404(Volunteering, pk=pk)
     volunteering.delete()
     return redirect('cv:display_cv')
+
+def employment_new(request):
+    form = EmploymentForm()
+    return render(request, 'cv/employment_edit.html', {'form': form})
