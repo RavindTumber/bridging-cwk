@@ -10,6 +10,30 @@ class CVPageTest(TestCase):
         response = self.client.get('/cv/')
         self.assertTemplateUsed(response, 'cv/cv.html')
 
+class CvEmploymentTest(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username='tempUser', password='temp')
+        self.client.login(username='tempUser', password='temp')
+
+    def tearDown(self):
+        self.user.delete()
+
+    def test_employment_form_valid_data(self):
+        form = EmploymentForm(data={
+            'company_name': 'Test',
+            'role': 'Test',
+            'location': 'Test',
+            'start_date': 'Test',
+            'end_date': 'Test',
+            'description': 'Test'
+        })
+        self.assertTrue(form.is_valid(), 'Should be valid if appropriate data is given')
+
+    def test_employment_form_no_data(self):
+        form = EmploymentForm(data={})
+        self.assertFalse(form.is_valid(), 'Should be invalid if no data is given')
+
 class CvEducationTest(TestCase):
     
     def setUp(self):
