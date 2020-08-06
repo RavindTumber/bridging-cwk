@@ -61,7 +61,7 @@ class CvEmploymentTest(TestCase):
         })
         self.assertEquals(response.status_code, 302, 'Should redirect back to /cv/')
         self.assertEquals(len(Employment.objects.all()), 1, 'Should only be one object created')
-        self.assertEqual(Employment.objects.first().name, 'Test', 'Should have its name be equal to Test')
+        self.assertEqual(Employment.objects.first().company_name, 'Test', 'Should have its name be equal to Test')
 
 class CvEducationTest(TestCase):
     

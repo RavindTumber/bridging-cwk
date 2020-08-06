@@ -15,7 +15,7 @@ def education_new(request):
     if request.method == "POST":
             form = EducationForm(request.POST)
             if form.is_valid:
-                education = form.save()
+                form.save()
                 return redirect('cv:display_cv')
     else:
         form = EducationForm()
@@ -28,7 +28,7 @@ def education_edit(request, pk):
     if request.method == "POST":
         form = EducationForm(request.POST, instance=education)
         if form.is_valid:
-            education = form.save()
+            form.save()
             return redirect('cv:display_cv')
     else:
         form = EducationForm(instance=education)
@@ -46,7 +46,7 @@ def volunteering_new(request):
     if request.method == "POST":
         form = VolunteeringForm(request.POST)
         if form.is_valid:
-            volunteering = form.save()
+            form.save()
             return redirect('cv:display_cv')
     else:
         form = VolunteeringForm()
@@ -59,7 +59,7 @@ def volunteering_edit(request, pk):
     if request.method == "POST":
         form = VolunteeringForm(request.POST, instance=volunteering)
         if form.is_valid:
-            volunteering = form.save()
+            form.save()
             return redirect('cv:display_cv')
     else:
         form = VolunteeringForm(instance=volunteering)
@@ -74,5 +74,12 @@ def volunteering_remove(request, pk):
 
 @login_required
 def employment_new(request):
-    form = EmploymentForm()
+    if request.method == "POST":
+        form = EmploymentForm(request.POST)
+        if form.is_valid:
+            form.save()
+            return redirect('cv:display_cv')
+    else:
+        form = EmploymentForm()
+
     return render(request, 'cv/employment_edit.html', {'form': form})
