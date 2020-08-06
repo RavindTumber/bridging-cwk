@@ -94,5 +94,23 @@ class FunctionalTest(unittest.TestCase):
         self.driver.find_element_by_id('delete_volunteering_1').click()
         self.assertEqual(len(self.driver.find_elements_by_class_name('card')), 0)
 
+    def test_cv_employment(self):
+        # Want to test that a user can login and create an employment entry
+        self.login()
+        # User navigates to the CV page
+        self.driver.get('http://localhost:8000/cv/')
+
+        # User clicks on the 'Add Employment' button
+        self.driver.find_element_by_id('add_employment').click()
+
+        # User can see all of the fields and fill them in
+        self.driver.find_element_by_id('id_company_name').send_keys('Test employment')
+        self.driver.find_element_by_id('id_role').send_keys('Test employment')
+        self.driver.find_element_by_id('id_location').send_keys('Test employment')
+        self.driver.find_element_by_id('id_start_date').send_keys('2019')
+        self.driver.find_element_by_id('id_end_date').send_keys('2020')
+        self.driver.find_element_by_id('id_description').send_keys('Test employment')
+        self.driver.find_element_by_id('save').click()
+
 if __name__ == '__main__':
     unittest.main()
