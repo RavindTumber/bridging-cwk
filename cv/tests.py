@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 
-from .models import Education, Volunteering
-from .forms import EducationForm, VolunteeringForm
+from .models import Employment, Education, Volunteering
+from .forms import EmploymentForm, EducationForm, VolunteeringForm
 
 class CVPageTest(TestCase):
 
