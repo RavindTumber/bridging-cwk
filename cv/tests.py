@@ -38,6 +38,31 @@ class CvEmploymentTest(TestCase):
         response = self.client.get('/cv/employment/new/')
         self.assertTemplateUsed(response, 'cv/employment_edit.html', 'Authenticated user can access')
 
+    def test_education_form_POST_adds_new_education(self):
+        response = self.client.post('/cv/education/new/', {
+            'name': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        self.assertEquals(response.status_code, 302, 'Should redirect back to /cv/')
+        self.assertEquals(len(Education.objects.all()), 1, 'Should only be one object created')
+        self.assertEqual(Education.objects.first().name, 'Test', 'Should have its name be equal to Test')
+
+    def test_employment_form_POST_adds_new_employment(self):
+        response = self.client.post('/cv/employment/new/', {
+            'company_name': 'Test',
+            'role': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        self.assertEquals(response.status_code, 302, 'Should redirect back to /cv/')
+        self.assertEquals(len(Employment.objects.all()), 1, 'Should only be one object created')
+        self.assertEqual(Employment.objects.first().name, 'Test', 'Should have its name be equal to Test')
+
 class CvEducationTest(TestCase):
     
     def setUp(self):

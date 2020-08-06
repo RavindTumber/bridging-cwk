@@ -72,6 +72,7 @@ def volunteering_remove(request, pk):
     volunteering.delete()
     return redirect('cv:display_cv')
 
+@login_required
 def employment_new(request):
     form = EmploymentForm()
     return render(request, 'cv/employment_edit.html', {'form': form})

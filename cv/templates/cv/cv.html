@@ -14,6 +14,14 @@
             <br>
             <p class="text-center">A diligent and hard-working second year computer science student who loves tackling problems.</p>
             <hr>
+
+            <div id="Experience">
+                <h3 class="text-center">Employment</h3>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'cv:employment_new' %}" class="btn btn-primary" id="add_employment">Add Employment</a>
+                    <br> <br>
+                {% endif %}
+            </div>
                         
             <div id="Education">
                 <h3 class="text-center">Education</h3>
@@ -65,8 +73,6 @@
                     </div>
                 {% endfor %}
             </div>
-
-            <div id="Experience"></div>
 
         </div>
     </body>

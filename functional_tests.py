@@ -112,5 +112,9 @@ class FunctionalTest(unittest.TestCase):
         self.driver.find_element_by_id('id_description').send_keys('Test employment')
         self.driver.find_element_by_id('save').click()
 
+        # User should be redirected to the CV page where their employment details will be displayed
+        employment = self.driver.find_element_by_id('employment_1')
+
+
 if __name__ == '__main__':
     unittest.main()
