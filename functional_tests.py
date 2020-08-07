@@ -48,7 +48,7 @@ class FunctionalTest(unittest.TestCase):
         # User should be redirected to the CV page where their education details will be displayed
         education = self.driver.find_element_by_id('education_1')
 
-        # User realises that they have entered incorrect data and decide to edit it
+        # User realises that they have entered incorrect data and decides to edit it
         self.driver.find_element_by_id('edit_education_1').click()
         name = self.driver.find_element_by_id('id_name')
         name.clear()
@@ -81,7 +81,7 @@ class FunctionalTest(unittest.TestCase):
         # User should be redirected to the CV page where their volunteering details will be displayed
         volunteering = self.driver.find_element_by_id('volunteering_1')
 
-        # User realises that they have entered incorrect data and decide to edit it
+        # User realises that they have entered incorrect data and decides to edit it
         self.driver.find_element_by_id('edit_volunteering_1').click()
         name = self.driver.find_element_by_id('id_name')
         name.clear()
@@ -114,6 +114,15 @@ class FunctionalTest(unittest.TestCase):
 
         # User should be redirected to the CV page where their employment details will be displayed
         employment = self.driver.find_element_by_id('employment_1')
+
+        # User realises that they have entered incorrect data and decides to edit it
+        self.driver.find_element_by_id('edit_employment_1').click()
+        role = self.driver.find_element_by_id('id_role')
+        role.clear()
+        role.send_keys('Test update')
+        self.driver.find_element_by_id('save').click()
+        updated_role = self.driver.find_element_by_xpath('//*[@id="employment_1"]/div/h5')
+        self.assertIn('Test update', updated_name.text, "Should display updated text")
 
 
 if __name__ == '__main__':
