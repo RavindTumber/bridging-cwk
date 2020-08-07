@@ -84,3 +84,16 @@ def employment_new(request):
         form = EmploymentForm()
 
     return render(request, 'cv/employment_edit.html', {'form': form})
+
+@login_required
+def employment_edit(request, pk):
+    employment = get_object_or_404(Employment, pk=pk)
+    if request.method == "POST":
+        form = EmploymentForm(request.POST, instance=employment)
+        if form.is_valid:
+            form.save()
+            return redirect('cv:display_cv')
+    else:
+        form = EmploymentForm(instance=employment)
+
+    return render(request, 'cv/employment_edit.html', {'form': form})

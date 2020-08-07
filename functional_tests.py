@@ -54,7 +54,7 @@ class FunctionalTest(unittest.TestCase):
         name.clear()
         name.send_keys('Test update')
         self.driver.find_element_by_id('save').click()
-        updated_name = self.driver.find_element_by_xpath('//*[@id="volunteering_1"]/div/h5')
+        updated_name = self.driver.find_element_by_xpath('//*[@id="education_1"]/div/h5')
         self.assertIn('Test update', updated_name.text, "Should display updated text")
 
         # User decides to delete an education entry
@@ -122,8 +122,7 @@ class FunctionalTest(unittest.TestCase):
         role.send_keys('Test update')
         self.driver.find_element_by_id('save').click()
         updated_role = self.driver.find_element_by_xpath('//*[@id="employment_1"]/div/h5')
-        self.assertIn('Test update', updated_name.text, "Should display updated text")
-
+        self.assertIn('Test update', updated_role.text, "Should display updated text")
 
 if __name__ == '__main__':
     unittest.main()
