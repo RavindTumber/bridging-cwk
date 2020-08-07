@@ -63,6 +63,43 @@ class CvEmploymentTest(TestCase):
         self.assertEquals(len(Employment.objects.all()), 1, 'Should only be one object created')
         self.assertEqual(Employment.objects.first().company_name, 'Test', 'Should have its name be equal to Test')
 
+    def test_uses_employment_edit_template(self):
+        self.client.post('/cv/employment/new/', {
+            'company_name': 'Test',
+            'role': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        employment = Employment.objects.first()
+        response = self.client.get('/cv/employment/' + str(employment.pk) + '/edit/')
+        self.assertTemplateUsed(response, 'cv/employment_edit.html', 'Authenticated user can access')
+    
+    def test_employment_edit(self):
+        self.client.post('/cv/employment/new/', {
+            'company_name': 'Test',
+            'role': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        employment = Employment.objects.first()
+        response = self.client.post('/cv/employment/' + str(employment.pk) + '/edit/', {
+            'company_name': 'Test edit',
+            'role': 'Test edit',
+            'location': 'Test edit',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test edit'
+        })
+        employment = Employment.objects.first()
+        self.assertEqual(response['location'], '/cv/', 'Should point the browser to a new location: /cv/')
+        self.assertEquals(len(Employment.objects.all()), 1, 'Should only be one object created')
+        self.assertEquals(employment.company_name, 'Test edit', 'Should update the employment company name field')
+        self.assertEquals(employment.location, 'Test edit', 'Should update the employment location field')
+
 class CvEducationTest(TestCase):
     
     def setUp(self):
