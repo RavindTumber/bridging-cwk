@@ -100,6 +100,20 @@ class CvEmploymentTest(TestCase):
         self.assertEquals(employment.company_name, 'Test edit', 'Should update the employment company name field')
         self.assertEquals(employment.location, 'Test edit', 'Should update the employment location field')
 
+    def test_employment_delete(self):
+        self.client.post('/cv/employment/new/', {
+            'company_name': 'Test',
+            'role': 'Test',
+            'location': 'Test',
+            'start_date': '2019',
+            'end_date': '2020',
+            'description': 'Test'
+        })
+        employment = Employment.objects.first()
+        response = self.client.get('/cv/employment/' + str(employment.pk) + '/remove/')
+        self.assertEqual(response['location'], '/cv/', 'Should point the browser to a new location: /cv/')
+        self.assertEquals(len(Employment.objects.all()), 0, 'Should be zero employment objects')
+
 class CvEducationTest(TestCase):
     
     def setUp(self):

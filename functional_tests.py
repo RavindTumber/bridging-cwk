@@ -124,5 +124,9 @@ class FunctionalTest(unittest.TestCase):
         updated_role = self.driver.find_element_by_xpath('//*[@id="employment_1"]/div/h5')
         self.assertIn('Test update', updated_role.text, "Should display updated text")
 
+        # User decides to delete an employment entry
+        self.driver.find_element_by_id('delete_employment_1').click()
+        self.assertEqual(len(self.driver.find_elements_by_class_name('card')), 0)
+
 if __name__ == '__main__':
     unittest.main()
