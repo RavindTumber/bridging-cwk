@@ -6,9 +6,10 @@ from .models import Employment, Education, Volunteering
 from .forms import EmploymentForm, EducationForm, VolunteeringForm
 
 def display_cv(request):
+    employment = Employment.objects.all()
     education = Education.objects.all()
     volunteering = Volunteering.objects.all()
-    return render(request, 'cv/cv.html', {'education': education, 'volunteering': volunteering, 'cv_page': 'active'})
+    return render(request, 'cv/cv.html', {'employment': employment, 'education': education, 'volunteering': volunteering, 'cv_page': 'active'})
 
 @login_required
 def education_new(request):
