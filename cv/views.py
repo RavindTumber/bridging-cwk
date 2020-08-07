@@ -97,3 +97,9 @@ def employment_edit(request, pk):
         form = EmploymentForm(instance=employment)
 
     return render(request, 'cv/employment_edit.html', {'form': form})
+
+@login_required
+def employment_remove(request, pk):
+    employment = get_object_or_404(Employment, pk=pk)
+    employment.delete()
+    return redirect('cv:display_cv')

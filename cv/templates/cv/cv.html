@@ -29,6 +29,7 @@
                                 {{ entry.role }}
                                 {% if user.is_authenticated %}
                                     <a href="{% url 'cv:employment_edit' pk=entry.pk %}" style="float:right;" class="btn btn-primary" id="edit_employment_{{ forloop.counter }}">Edit</a>
+                                    <a href="{% url 'cv:employment_remove' pk=entry.pk %}" style="float:right; margin-right: 0.5rem;" class="btn btn-primary" id="delete_employment_{{ forloop.counter }}">Delete</a>
                                 {% endif %}
                             </h5>
                             <p class="card-text">{{ entry.company_name }}, {{ entry.location }} ({{ entry.start_date }} - {{ entry.end_date }})
