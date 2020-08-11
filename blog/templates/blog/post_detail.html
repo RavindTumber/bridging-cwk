@@ -14,12 +14,12 @@
             </div>
         </div>
 
-        <div class="container mt-5">
-            {% if user.is_authenticated %}
-                <a href="{% url 'blog:post_edit' pk=post.pk %}" class="btn btn-primary">Edit Post</a>
-            {% endif %}
-            
-            <h3>{{ post.title }}</h3>
+        <div class="container mt-5">            
+            <h3>{{ post.title }}
+                {% if user.is_authenticated %}
+                    <a href="{% url 'blog:post_edit' pk=post.pk %}" class="btn btn-primary float-right">Edit Post</a>
+                {% endif %}
+            </h3>
             <hr>
             <p>{{ post.published_date.date }} &nbsp; · &nbsp; {{ post.text|wordcount|read_time }} min read</p>
             <p>{{ post.text|safe }}</p>

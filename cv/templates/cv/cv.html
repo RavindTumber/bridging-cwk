@@ -15,32 +15,6 @@
             <p class="text-center">A diligent and hard-working second year computer science student who loves tackling problems.</p>
             <hr>
 
-            <div id="Experience">
-                <h3 class="text-center">Employment</h3>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'cv:employment_new' %}" class="btn btn-primary" id="add_employment">Add Employment</a>
-                    <br> <br>
-                {% endif %}
-
-                {% for entry in employment %}
-                    <div class="card bg-light mb-3" id="employment_{{ forloop.counter }}">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                {{ entry.role }}
-                                {% if user.is_authenticated %}
-                                    <a href="{% url 'cv:employment_edit' pk=entry.pk %}" style="float:right;" class="btn btn-primary" id="edit_employment_{{ forloop.counter }}">Edit</a>
-                                    <a href="{% url 'cv:employment_remove' pk=entry.pk %}" style="float:right; margin-right: 0.5rem;" class="btn btn-primary" id="delete_employment_{{ forloop.counter }}">Delete</a>
-                                {% endif %}
-                            </h5>
-                            <p class="card-text">{{ entry.company_name }}, {{ entry.location }} ({{ entry.start_date }} - {{ entry.end_date }})
-                                <br> 
-                                {{ entry.description }}
-                            </p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-                        
             <div id="Education">
                 <h3 class="text-center">Education</h3>
                 {% if user.is_authenticated %}
@@ -58,13 +32,37 @@
                                     <a href="{% url 'cv:education_remove' pk=entry.pk %}" style="float:right; margin-right: 0.5rem;" class="btn btn-primary" id="delete_education_{{ forloop.counter }}">Delete</a>
                                 {% endif %}
                             </h5>
-                            <p class="card-text">{{ entry.location }} ({{ entry.start_date }} - {{ entry.end_date }})
+                            <p class="card-text">{{ entry.location }} <strong>({{ entry.start_date }} - {{ entry.end_date }})</strong>
                                 <br> 
-                                {{ entry.description }}
+                                {{ entry.description|linenumbers }}
                             </p> 
                         </div>
                     </div>
-                    <br>
+                {% endfor %}
+            </div>
+
+            <div id="Employment">
+                <h3 class="text-center">Employment</h3>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'cv:employment_new' %}" class="btn btn-primary" id="add_employment">Add Employment</a>
+                    <br> <br>
+                {% endif %}
+
+                {% for entry in employment %}
+                    <div class="card bg-light mb-3" id="employment_{{ forloop.counter }}">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ entry.role }}
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'cv:employment_edit' pk=entry.pk %}" style="float:right;" class="btn btn-primary" id="edit_employment_{{ forloop.counter }}">Edit</a>
+                                    <a href="{% url 'cv:employment_remove' pk=entry.pk %}" style="float:right; margin-right: 0.5rem;" class="btn btn-primary" id="delete_employment_{{ forloop.counter }}">Delete</a>
+                                {% endif %}
+                            </h5>
+                            <p class="card-text">{{ entry.company_name }}, {{ entry.location }} <strong>({{ entry.start_date }} - {{ entry.end_date }})</strong>
+                                <br> {{ entry.description|linenumbers|linebreaksbr }}
+                            </p>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
 
@@ -81,13 +79,13 @@
                             <h5 class="card-title">
                                 {{ entry.name }}
                                 {% if user.is_authenticated %}
-                                    <a href="{% url 'cv:volunteering_edit' pk=entry.pk %}" style="float:right;" class="btn btn-primary" id="edit_volunteering_{{ forloop.counter }}">Edit</a>
-                                    <a href="{% url 'cv:volunteering_remove' pk=entry.pk %}" style="float:right; margin-right: 0.5rem;" class="btn btn-primary" id="delete_volunteering_{{ forloop.counter }}">Delete</a>
+                                    <a href="{% url 'cv:volunteering_edit' pk=entry.pk %}" class="btn btn-primary float-right" id="edit_volunteering_{{ forloop.counter }}">Edit</a>
+                                    <a href="{% url 'cv:volunteering_remove' pk=entry.pk %}" class="btn btn-primary float-right" id="delete_volunteering_{{ forloop.counter }}" style="margin-right: 0.5rem;">Delete</a>
                                 {% endif %}
                             </h5>
-                            <p class="card-text">{{ entry.location }} ({{ entry.start_date }} - {{ entry.end_date }})
+                            <p class="card-text">{{ entry.location }} <strong>({{ entry.start_date }} - {{ entry.end_date }})</strong>
                                 <br> 
-                                {{ entry.description }}
+                                {{ entry.description|linenumbers }}
                             </p>
                         </div>
                     </div>
