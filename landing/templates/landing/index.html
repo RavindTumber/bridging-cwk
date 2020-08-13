@@ -22,10 +22,18 @@
                     <i class="fab fa-github mr-4"></i>
                 </a>
                 <a href="#">
-                    <i class="far fa-envelope mr-4"></i>
+                    <i class="far fa-envelope mr-4" id="emailAddress" onclick="copyEmail()"></i>
                 </a>
             </div>
         </div>
+
+        <script>
+            function copyEmail() {
+                navigator.clipboard.writeText('ravindtumber1@gmail.com');
+                alert("My email address has been copied to your clipboard :)");
+            }
+        </script>
+
     </body>
 
 {% endblock %}
