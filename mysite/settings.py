@@ -42,9 +42,6 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'cv.apps.CvConfig',
     'landing.apps.LandingConfig',
-
-    # third party
-    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -128,7 +125,3 @@ LOGIN_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
