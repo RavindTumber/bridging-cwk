@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'cv.apps.CvConfig',
     'landing.apps.LandingConfig',
+
+    # third party
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
