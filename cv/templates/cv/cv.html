@@ -34,7 +34,7 @@
                             </h5>
                             <p class="card-text">{{ entry.location }} <strong>({{ entry.start_date }} - {{ entry.end_date }})</strong>
                                 <br> 
-                                {{ entry.description|linenumbers }}
+                                {{ entry.description|linenumbers|linebreaksbr }}
                             </p> 
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                             </h5>
                             <p class="card-text">{{ entry.location }} <strong>({{ entry.start_date }} - {{ entry.end_date }})</strong>
                                 <br> 
-                                {{ entry.description|linenumbers }}
+                                {{ entry.description|linenumbers|linebreaksbr }}
                             </p>
                         </div>
                     </div>
