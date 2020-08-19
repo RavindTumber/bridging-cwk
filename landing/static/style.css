@@ -18,6 +18,10 @@
     width: 100%;
 }
 
+.icons {
+    font-size: 2rem;
+}
+
 i.far,
 i.fab {
     color: #6383CE;
